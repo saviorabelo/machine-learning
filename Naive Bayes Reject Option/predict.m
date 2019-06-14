@@ -1,4 +1,4 @@
-function output = predict(pattern, model)
+function [value, output] = predict(pattern, model)
     
     n_classes = size(model.classes, 1);
     likelihood = cell(n_classes, 1);
@@ -18,7 +18,7 @@ function output = predict(pattern, model)
         posteriors(i) = ((likelihood{i} * model.priori{i}) / evidence);
     end
     
-    [~, index] = max(posteriors);
+    [value, index] = max(posteriors);
     output = model.classes(index,:);
 
 end

@@ -20,6 +20,8 @@ sens = zeros(1, n_iter);
 spec = zeros(1, n_iter);
 prec = zeros(1, n_iter);
 model.distribution = 'normal';
+model.threshold = (.05: .05: .5);
+model.rej_ratio = (.04: .04: .5);
 
 %% Importing the data set into the workspace
 
@@ -62,6 +64,7 @@ for i = 1:n_iter
     [X_tra, Y_tra, X_test, Y_test] = split_data(data_aux, classes);
     
     model = train(X_tra, Y_tra, model);
+    model = rejectOption(X_tra, Y_tra, model);
     [accu(i), sens(i), spec(i), prec(i)] = test(X_test, Y_test, model);
 end
 toc;
