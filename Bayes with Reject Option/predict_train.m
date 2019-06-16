@@ -1,4 +1,4 @@
-function [predictions] = test(X_test, Y_test, model)
+function [predictions] = predict_train(X_test, Y_test, model)
 
 prob = zeros(1,size(Y_test,1));
 classes = zeros(size(Y_test));
