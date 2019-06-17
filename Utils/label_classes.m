@@ -20,6 +20,5 @@ function [ data ] = label_classes( data, classes, problem_type )
         class_i = strcmp(classes, tmp_classes(j));
         data(class_i, label_vector(j)) = 1;
     end
-
+    
 end
-

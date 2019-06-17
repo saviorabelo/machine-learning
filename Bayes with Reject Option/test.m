@@ -1,5 +1,6 @@
-function [valores, accu, sens, spec, prec] = test(X_test, Y_test, model)
-valores = [];
+function [answer] = test(X_test, Y_test, model)
+
+answer = [];
 aux_t = 1;
 for t = model.optimumParamsT
     predictions = predict_train(X_test, Y_test, model);
@@ -17,17 +18,7 @@ for t = model.optimumParamsT
         error = sum(l_convert(Y_test)' ~= predict) / size(Y_test,1);
     end
     wr = model.rej_ratio(aux_t);
-    valores = [valores; wr t (1-error) rejection (error + wr*rejection)];
+    answer = [answer; wr t (1-error) rejection (error + wr*rejection)];
     aux_t = aux_t + 1;
 end
 
-
-%% Confusion matrix
-
-%figure(1)
-%plotconfusion(Y_test',m_output','Bayesian');
-[~,r]= confusion_aux.getMatrix(l_convert(Y_test)', predictions.classes);
-accu = r.Accuracy;
-sens = r.Sensitivity;
-spec = r.Specificity;
-prec = r.Precision;

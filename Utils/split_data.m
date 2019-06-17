@@ -28,9 +28,9 @@ function [ X_training, Y_training, X_test, Y_test ] = split_data( data, classes 
         n_classes = 1;
     end
     
-%     if nargin < 2
-%         n_classes = 1;
-%     end
+
+    n_classes = 1;
+
     
     n_patterns = size(data, 1);
     n_features = size(data, 2);

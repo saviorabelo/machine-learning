@@ -7,4 +7,4 @@ for i=1:size(X_test,1)
 end
 
 predictions.prob = prob;
-predictions.classes = l_convert(classes)';
+predictions.classes = classes';
