@@ -34,7 +34,7 @@ plot(data(1:n,1), data(1:n,2), '*', 'Color', [0.00 0.45 0.74], ...
 plot(data(n+1:end,1), data(n+1:end,2), '*', 'Color', [0.31 0.31 0.31], ...
     'DisplayName', 'Classe 2')
 
-title('Naive Bayes Color Map')
+title('Bayesian Classifier based on Gaussian Parzen Windows Color Map')
 xlabel('Eixo x')
 ylabel('Eixo y')
 legend show

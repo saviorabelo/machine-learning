@@ -2,7 +2,7 @@ function [best_h] = grid_search_parzen(X_tra, Y_tra, model)
 
 [m, ~] = size(X_tra);
 %h = (0.05:0.1:0.5);
-h = (0.05:0.1:1);
+h = (0.05:0.05:0.5);
 
 k_grid = 5;
 slice = m/k_grid;

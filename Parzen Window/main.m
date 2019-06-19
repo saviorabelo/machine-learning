@@ -22,8 +22,8 @@ prec = zeros(1, n_iter);
 
 %% Importing the data set into the workspace
 
-%name_file = 'iris.dat';
-%n_attribute = 4;
+name_file = 'iris.dat';
+n_attribute = 4;
 
 %name_file = 'column_3C.dat';
 %n_attribute = 6;
@@ -37,21 +37,22 @@ prec = zeros(1, n_iter);
 %name_file = 'breast-cancer-wisconsin.dat';
 %n_attribute = 10;
 
-%[data, classes] = load_data(name_file, n_attribute);
-%data = label_classes(data, classes);
-%data = normalize(data, n_attribute);
+[data, classes] = load_data(name_file, n_attribute);
+data = label_classes(data, classes);
+data = normalize(data, n_attribute);
 model.desc = 'Bayesian Classifier based on Gaussian Parzen Windows';
 
 %% Remove column
 
 %data(:,3) = [];
 %data(:,3) = [];
-%n = 50;
+%data(:,3) = [];
+%data(:,3) = [];
 
 %% Importing the random data set into the workspace
 
-n = 50;
-[data, classes] = data2D_2c(n);
+%n = 50;
+%[data, classes] = data2D_2c(n);
 %[data, classes] = data2D_and(n);
 %[data, classes] = data2D_3c(n);
 
@@ -73,7 +74,10 @@ toc;
 %color_map_2c(n, data, model);
 %color_map_and(n, data, model);
 %color_map_3c(n, data, model);
-%boxplot((accu)*100, 'Color', 'k', 'Symbol', 'b+', 'PlotStyle', 'compact');
+%color_map_iris(data, model);
+%color_map_column(data, model);
+%boxplot((accu)*100, 'Color', 'k', 'Symbol', 'b+', ...
+%    'PlotStyle', 'compact');
 
 %% Displaying summarized results
 

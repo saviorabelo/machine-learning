@@ -1,5 +1,6 @@
-function [] = color_map_3c(n, data, model)
+function [] = color_map_iris(data, model)
 
+n = 50;
 i = 1;
 j = 1;
 k = 1;
@@ -36,11 +37,11 @@ plot(color3(:,1), color3(:,2), '.', 'Color', [0.95 0.87 0.73], ...
     'LineStyle', '-', 'LineWidth', 3.0, 'HandleVisibility', 'off')
 
 plot(data(1:n,1), data(1:n,2), '*', 'Color', [0.00 0.45 0.74], ...
-    'DisplayName', 'Classe 1')
+    'DisplayName', 'Setosa')
 plot(data(n+1:2*n,1), data(n+1:2*n,2), '*', 'Color', [0.31 0.31 0.31], ...
-    'DisplayName', 'Classe 2')
+    'DisplayName', 'Versicolor')
 plot(data(2*n+1:end,1), data(2*n+1:end,2), '*', 'Color', [0.60 0.20 0.00], ...
-    'DisplayName', 'Classe 3')
+    'DisplayName', 'Virginica')
 
 title('Bayesian Classifier based on Gaussian Parzen Windows Color Map')
 xlabel('Eixo x')
