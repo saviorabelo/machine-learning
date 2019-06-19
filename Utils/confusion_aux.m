@@ -59,15 +59,16 @@ classdef confusion_aux
             end
             un_actual=unique(actual);
             un_predict=unique(predict);
-            condition=length(un_actual)==length(un_predict);
             
-            if ~condition
-                error('Class List is not same in given inputs')
-            end
-            condition=(sum(un_actual==un_predict)==length(un_actual));
-            if ~condition
-                error('Class List in given inputs are different')
-            end
+%             condition=length(un_actual)==length(un_predict);
+%             
+%             if ~condition
+%                 error('Class List is not same in given inputs')
+%             end
+%             condition=(sum(un_actual==un_predict)==length(un_actual));
+%             if ~condition
+%                 error('Class List in given inputs are different')
+%             end
             
             %%
             %Start process

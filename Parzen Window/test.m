@@ -1,0 +1,28 @@
+function [accu, sens, spec, prec] = test(X_test, Y_test, model)
+
+m_output = zeros(size(Y_test));
+%miss = 0;
+for i=1:size(X_test,1)
+    m_output(i,:) = predict(X_test(i,:), model);
+%     answer = predict(X_test(i,:), model);
+%     if isequal(answer, Y_test(i,:))
+%         miss = miss + 1;
+%     end
+end
+
+%accu = miss / size(X_test,1);
+%sens = 0;
+%spec = 0;
+%prec = 0;
+
+%% Confusion matrix
+
+%figure(1)
+%plotconfusion(Y_test',m_output','');
+[~,r]= confusion_aux.getMatrix(l_convert(Y_test),l_convert(m_output));
+accu = r.Accuracy;
+sens = r.Sensitivity;
+spec = r.Specificity;
+prec = r.Precision;
+
+end
