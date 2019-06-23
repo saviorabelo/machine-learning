@@ -12,7 +12,6 @@ function output = predict(pattern, model)
         posteriors(i,:) = sum(answer);
     end
     
-    
     [~, index] = max(posteriors);
     output = model.classes(index,:);
 

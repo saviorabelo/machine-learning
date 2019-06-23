@@ -20,7 +20,6 @@ sens = zeros(1, n_iter);
 spec = zeros(1, n_iter);
 prec = zeros(1, n_iter);
 
-model.k = 2;
 model.maxiters = 100;
 model.threshold = 1e-10;
 
@@ -64,6 +63,8 @@ for i = 1:n_iter
     data_aux = shuffle_data(data);
     [X_tra, Y_tra, X_test, Y_test] = split_data(data_aux, classes);
     
+    best_k = grid_search_gmm(X_tra, Y_tra, model);
+    model.k = best_k;
     model = train(X_tra, Y_tra, model);
     [accu(i), sens(i), spec(i), prec(i)] = test(X_test, Y_test, model);
 end
