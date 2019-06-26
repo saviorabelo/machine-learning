@@ -8,7 +8,7 @@ end
 %% Confusion matrix
 
 %figure(1)
-%plotconfusion(Y_test',m_output','GMM');
+%plotconfusion(Y_test',m_output','Gaussian Mixture Model');
 [~,r]= confusion_aux.getMatrix(l_convert(Y_test),l_convert(m_output));
 accu = r.Accuracy;
 sens = r.Sensitivity;
