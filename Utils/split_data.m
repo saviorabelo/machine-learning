@@ -1,4 +1,4 @@
-function [ X_training, Y_training, X_test, Y_test ] = split_data( data, classes )
+function [ X_training, Y_training, X_test, Y_test ] = split_data( data, classes, problem_type)
 %SPLIT_DATA splits the presented data set in order to get the input data and
 % its respectives outputs, so the network can fully work without the need of
 % filtering the data set every time that it needs only either the input data
@@ -24,11 +24,10 @@ function [ X_training, Y_training, X_test, Y_test ] = split_data( data, classes 
         n_classes = length(unique(classes, 'rows'));
     end
     
-    if n_classes < 3
+    if or(n_classes < 3, nargin == 3)
         n_classes = 1;
     end
     
-    %n_classes = 1;
     
     n_patterns = size(data, 1);
     n_features = size(data, 2);
@@ -53,7 +52,6 @@ function [ X_training, Y_training, X_test, Y_test ] = split_data( data, classes 
     X_test = data(trial_set, 1 : patt_bound);
     Y_test = data(trial_set, patt_bound + 1 : n_features);
     
-
 %     % Inserting the bias for each training sample
 %     bias = -1 * ones(bound, 1);
 %     X_training = [bias X_training];

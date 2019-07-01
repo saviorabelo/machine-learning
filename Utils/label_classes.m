@@ -9,8 +9,10 @@ function [ data ] = label_classes( data, classes, problem_type )
 
     if nargin < 3
         k = size(tmp_classes, 1);
+        aux = 0;
     elseif strcmp(problem_type, '2C')
         k = 1;
+        aux = 1;
     end
 
     i = size(data,2);
@@ -19,6 +21,11 @@ function [ data ] = label_classes( data, classes, problem_type )
     for j = 1 : k
         class_i = strcmp(classes, tmp_classes(j));
         data(class_i, label_vector(j)) = 1;
+    end
+    
+    if aux
+        a = label_vector;
+        data(find(data(:,a)==0),a) = -1;
     end
     
 end
