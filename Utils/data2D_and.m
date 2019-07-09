@@ -22,9 +22,9 @@ y4 = ((aux).*rand(n, 1) + 0.6);
 data = [x1 y1 ones(n,1);
     x2 y2 ones(n,1);
     x3 y3 ones(n,1);
-    x4 y4 zeros(n,1)];
+    x4 y4 -ones(n,1)];
 
-classes = [ones(3*n,1); zeros(n,1)];
+classes = [ones(3*n,1); -ones(n,1)];
 
 
 

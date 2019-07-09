@@ -1,27 +1,28 @@
-function [model] = grid_search_lssvm(X_tra, Y_tra, model)
+function [params] = grid_search_svm(X_tra, Y_tra, params)
 
-
-    switch model.kernel
+    switch params.kernel
         case 'linear'
-            model = gs_linear(X_tra, Y_tra, model);
+            params = gs_linear(X_tra, Y_tra, params);
         case 'rbf'
-            model = gs_rbf(X_tra, Y_tra, model);
+            params = gs_rbf(X_tra, Y_tra, params);
+        case 'polynomial'
+            params = gs_linear(X_tra, Y_tra, params);
         otherwise
                 error([type ' is not a valid kernel!'])
     end
     
 end
 
-function [model] = gs_linear(X_tra, Y_tra, model)
+function [params] = gs_linear(X_tra, Y_tra, params)
 
 [m, ~] = size(X_tra);
-gammas = 2 .^ (1 : 10);
+constraint = 2 .^ (1 : 10);
 
 k_grid = 5;
 slice = m/k_grid;
-grid_acuracy = zeros(1, length(gammas));
+grid_acuracy = zeros(1, length(constraint));
 
-for i = 1:length(gammas)
+for i = 1:length(constraint)
     scores = zeros(1, k_grid);
     %Cross validation
     for j = 1:k_grid
@@ -35,9 +36,9 @@ for i = 1:length(gammas)
         X_test_aux = X_tra(a:b,:);
         Y_test_aux = Y_tra(a:b,:);
     
-        %LS-SVM
-        model.gamma = gammas(i);
-        model = train(X_tra_aux, Y_tra_aux, model);
+        %SVM
+        params.constraint = constraint(i);
+        model = train(X_tra_aux, Y_tra_aux, params);
         [scores(j),~,~,~] = test(X_test_aux, Y_test_aux, model);
         
     end
@@ -46,21 +47,21 @@ end
 
 %Index of the best element
 [~, index] = max(grid_acuracy);
-model.gamma = gammas(index);
+params.constraint = constraint(index);
 
 end
 
-function [model] = gs_rbf(X_tra, Y_tra, model)
+function [params] = gs_rbf(X_tra, Y_tra, params)
 
 [m, ~] = size(X_tra);
-gammas = 2 .^ (1 : 10);
+constraints = 2 .^ (1 : 10);
 sigmas = 2 .^ (-3 : 3);
 
 k_grid = 5;
 slice = m/k_grid;
-grid_acuracy = zeros(length(sigmas), length(gammas));
+grid_acuracy = zeros(length(constraints), length(sigmas));
 
-for i = 1:length(gammas)
+for i = 1:length(constraints)
     for l = 1:length(sigmas)
         scores = zeros(1, k_grid);
         %Cross validation
@@ -75,10 +76,10 @@ for i = 1:length(gammas)
             X_test_aux = X_tra(a:b,:);
             Y_test_aux = Y_tra(a:b,:);
 
-            %LSSVM
-            model.gamma = gammas(i);
-            model.sigma = sigmas(l);
-            model = train(X_tra_aux, Y_tra_aux, model);
+            %SVM
+            params.constraint = constraints(i);
+            params.sigma = sigmas(l);
+            model = train(X_tra_aux, Y_tra_aux, params);
             [scores(j),~,~,~] = test(X_test_aux, Y_test_aux, model);
 
         end
@@ -87,17 +88,10 @@ for i = 1:length(gammas)
 end
 
 %Index of the best element
-[~, index] = max(grid_acuracy);
-model.gamma = gammas(index);
+[~, index] = max(grid_acuracy(:));
+[I_row, I_col] = ind2sub(length(grid_acuracy), index);
 
-
-
-
-%Índice do maior elemmento
-[M, I] = max(grade(:));
-[I_row, I_col] = ind2sub(length(grade), I);
-
-melhor_eta = eta(I_col);
-melhor_q = q(I_row);
+params.constraint = constraints(I_row);
+params.sigma = sigmas(I_col);
 
 end

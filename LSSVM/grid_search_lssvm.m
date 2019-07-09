@@ -5,6 +5,8 @@ function [model] = grid_search_lssvm(X_tra, Y_tra, model)
             model = gs_linear(X_tra, Y_tra, model);
         case 'rbf'
             model = gs_rbf(X_tra, Y_tra, model);
+        case 'polynomial'
+            model = gs_linear(X_tra, Y_tra, model);
         otherwise
                 error([type ' is not a valid kernel!'])
     end
