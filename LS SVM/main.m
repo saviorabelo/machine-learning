@@ -14,14 +14,14 @@ addpath('../Utils/');
 %% Setting variables - Initialization
 
 tic;
-n_iter = 1;
+n_iter = 50;
 accu = zeros(1, n_iter);
 sens = zeros(1, n_iter);
 spec = zeros(1, n_iter);
 prec = zeros(1, n_iter);
 
-model.kernel = 'linear';
-%model.kernel = 'rbf';
+%model.kernel = 'linear';
+model.kernel = 'rbf';
 
 %% Importing the data set into the workspace
 
@@ -58,13 +58,13 @@ data = normalize(data, n_attribute);
 %[data, classes] = data2D_and(n);
 %[data, classes] = data2D_3c(n);
 
-%% LS-SVM Classifier
+%% LSSVM Classifier
 
 for i = 1:n_iter
     data_aux = shuffle_data(data);
     [X_tra, Y_tra, X_test, Y_test] = split_data(data_aux, classes, '2C');
     
-    model = grid_search_lssvm(X_tra, Y_tra, model);
+    model = grid_search_lssvm(X_tra, Y_tra, model); 
     model = train(X_tra, Y_tra, model);
     [accu(i), sens(i), spec(i), prec(i)] = test(X_test, Y_test, model);
 end

@@ -1,5 +1,6 @@
 function [model] = grid_search_lssvm(X_tra, Y_tra, model)
 
+
     switch model.kernel
         case 'linear'
             model = gs_linear(X_tra, Y_tra, model);
@@ -57,7 +58,7 @@ sigmas = 2 .^ (-3 : 3);
 
 k_grid = 5;
 slice = m/k_grid;
-grid_acuracy = zeros(length(gammas), length(sigmas));
+grid_acuracy = zeros(length(sigmas), length(gammas));
 
 for i = 1:length(gammas)
     for l = 1:length(sigmas)
@@ -86,10 +87,17 @@ for i = 1:length(gammas)
 end
 
 %Index of the best element
-[~, index] = max(grid_acuracy(:));
-[I_row, I_col] = ind2sub(length(grid_acuracy), index);
+[~, index] = max(grid_acuracy);
+model.gamma = gammas(index);
 
-model.gamma = gammas(I_row);
-model.sigma = sigmas(I_col);
+
+
+
+%Índice do maior elemmento
+[M, I] = max(grade(:));
+[I_row, I_col] = ind2sub(length(grade), I);
+
+melhor_eta = eta(I_col);
+melhor_q = q(I_row);
 
 end
