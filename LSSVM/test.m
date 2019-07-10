@@ -8,7 +8,7 @@ end
 %% Confusion matrix
 
 %figure(1)
-%plotconfusion(Y_test',m_output','LS-SVM');
+%plotconfusion(Y_test',m_output','LSSVM');
 [~,r]= confusion_aux.getMatrix(l_convert(Y_test),l_convert(m_output));
 accu = r.Accuracy;
 sens = r.Sensitivity;

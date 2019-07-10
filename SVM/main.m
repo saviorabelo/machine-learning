@@ -29,9 +29,6 @@ params.kernel = 'linear';
 name_file = 'iris.dat';
 n_attribute = 4;
 
-%name_file = 'column_3C.dat';
-%n_attribute = 6;
-
 %name_file = 'column_2C.dat';
 %n_attribute = 6;
 
@@ -41,9 +38,9 @@ n_attribute = 4;
 %name_file = 'breast-cancer-wisconsin.dat';
 %n_attribute = 10;
 
-%[data, classes] = load_data(name_file, n_attribute);
-%data = label_classes(data, classes, '2C');
-%data = normalize(data, n_attribute);
+[data, classes] = load_data(name_file, n_attribute);
+data = label_classes(data, classes, '2C');
+data = normalize(data, n_attribute);
 
 %% Remove column
 

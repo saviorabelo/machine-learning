@@ -14,7 +14,7 @@ addpath('../Utils/');
 %% Setting variables - Initialization
 
 tic;
-n_iter = 1;
+n_iter = 50;
 accu = zeros(1, n_iter);
 sens = zeros(1, n_iter);
 spec = zeros(1, n_iter);
@@ -28,9 +28,6 @@ model.kernel = 'linear';
 
 name_file = 'iris.dat';
 n_attribute = 4;
-
-%name_file = 'column_3C.dat';
-%n_attribute = 6;
 
 %name_file = 'column_2C.dat';
 %n_attribute = 6;
@@ -72,10 +69,10 @@ toc;
 
 %% Plot artificial
 
-%color_map_2c(n, data, model);
-%color_map_and(n, data, model);
 %color_map_iris(data, model);
 %color_map_column(data, model);
+%color_map_2c(n, data, model);
+%color_map_and(n, data, model);
 
 %% Displaying summarized results
 
